@@ -4,6 +4,9 @@ import { Dashboard } from './app/pages/dashboard/dashboard';
 import { Documentation } from './app/pages/documentation/documentation';
 import { Landing } from './app/pages/landing/landing';
 import { Notfound } from './app/pages/notfound/notfound';
+import { Roles } from './app/core/constants/roles';
+import { roleGuard } from './app/core/guards/role.guard';
+import { authGuard } from './app/core/guards/auth.guard';
 
 export const appRoutes: Routes = [
     {
@@ -18,6 +21,13 @@ export const appRoutes: Routes = [
     },
     { path: 'landing', component: Landing },
     { path: 'notfound', component: Notfound },
-    { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },
+    {
+        path: 'auth',
+        children: [
+            { path: 'login', loadComponent: () => import('./app/pages/auth/login/login.component').then(m => m.LoginComponent) },
+            { path: 'signup', loadComponent: () => import('./app/pages/auth/signup/signup.component').then(m => m.SignupComponent) }
+        ]
+    },
+    //{ path: 'plans/manage', canActivate: [authGuard, roleGuard(Roles.SuperAdmin)], component: PlanManageComponent },
     { path: '**', redirectTo: '/notfound' }
 ];
