@@ -16,7 +16,7 @@
             <div class="mb-4">
                 <label for="password" class="block mb-2">Password</label>
                 <p-password id="password" formControlName="password" [toggleMask]="true" styleClass="w-full"
-                    inputStyleClass="w-full"></p-password>
+                    inputStyleClass="w-full" placeholder="Enter password"></p-password>
             </div>
 
             <p-message *ngIf="errorMessage()" severity="error" [text]="errorMessage()!"

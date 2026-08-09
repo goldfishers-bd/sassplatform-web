@@ -5,13 +5,13 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-4">
                 <label for="email" class="block mb-2">Email</label>
-                <input pInputText id="email" formControlName="email" class="w-full" placeholder="you@company.com" />
+                <input pInputText id="email" formControlName="email" class="w-full" placeholder="your-mail@company.com" />
             </div>
 
             <div class="mb-4">
                 <label for="password" class="block mb-2">Password</label>
                 <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true"
-                    styleClass="w-full" inputStyleClass="w-full"></p-password>
+                    styleClass="w-full" inputStyleClass="w-full" placeholder="Enter your password"></p-password>
             </div>
 
             <p-message *ngIf="errorMessage()" severity="error" [text]="errorMessage()!"

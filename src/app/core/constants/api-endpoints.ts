@@ -4,6 +4,9 @@ export const ApiEndpoints = {
         signup: 'auth/signup',
         refresh: 'auth/refresh'
     },
+    invitations: {
+        accept: 'invitations/accept'
+    },
     tenants: 'tenants',
     plans: 'plans',
     subscriptions: {

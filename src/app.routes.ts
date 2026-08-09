@@ -11,6 +11,7 @@ import { authGuard } from './app/core/guards/auth.guard';
 export const appRoutes: Routes = [
     {
         path: '',
+        canActivate: [authGuard],
         component: AppLayout,
         children: [
             { path: '', component: Dashboard },
@@ -25,7 +26,8 @@ export const appRoutes: Routes = [
         path: 'auth',
         children: [
             { path: 'login', loadComponent: () => import('./app/pages/auth/login/login.component').then(m => m.LoginComponent) },
-            { path: 'signup', loadComponent: () => import('./app/pages/auth/signup/signup.component').then(m => m.SignupComponent) }
+            { path: 'signup', loadComponent: () => import('./app/pages/auth/signup/signup.component').then(m => m.SignupComponent) },
+            { path: 'accept-invite', loadComponent: () => import('./app/pages/auth/accept-invite/accept-invite.component').then(m => m.AcceptInviteComponent) }
         ]
     },
     //{ path: 'plans/manage', canActivate: [authGuard, roleGuard(Roles.SuperAdmin)], component: PlanManageComponent },

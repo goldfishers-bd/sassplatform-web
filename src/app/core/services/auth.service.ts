@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AuthResponse, LoginRequest, SignupRequest } from '../models/auth.models';
+import { AcceptInviteRequest, AuthResponse, LoginRequest, SignupRequest } from '../models/auth.models';
+import { ApiEndpoints } from '../constants/api-endpoints';
 
 interface DecodedToken {
     sub: string;
@@ -85,5 +86,10 @@ export class AuthService {
         } catch {
             return false;
         }
+    }
+
+    acceptInvite(dto: AcceptInviteRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${environment.apiUrl}/${ApiEndpoints.invitations.accept}`, dto)
+            .pipe(tap(res => this.setSession(res)));
     }
 }

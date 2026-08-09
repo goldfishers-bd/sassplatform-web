@@ -14,3 +14,8 @@ export interface AuthResponse {
     expiresAt: string;
     refreshToken: string;
 }
+
+export interface AcceptInviteRequest {
+    token: string;
+    password: string;
+}
