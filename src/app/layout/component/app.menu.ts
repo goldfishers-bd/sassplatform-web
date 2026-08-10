@@ -53,6 +53,31 @@ export class AppMenu {
                 path: '/pages',
                 items: [
                     {
+                        label: 'Tenants',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/tenants']
+                    },
+                    {
+                        label: 'Plans',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/plans']
+                    },
+                    {
+                        label: 'Invitations',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/invitations']
+                    },
+                    {
+                        label: 'Billing',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/billing']
+                    },
+                    {
+                        label: 'Users',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/users']
+                    },
+                    {
                         label: 'Landing',
                         icon: 'pi pi-fw pi-globe',
                         routerLink: ['/landing']

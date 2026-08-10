@@ -19,3 +19,13 @@ export interface AcceptInviteRequest {
     token: string;
     password: string;
 }
+
+export interface ForgotPasswordRequest {
+    email: string;
+}
+
+export interface ResetPasswordRequest {
+    email: string;
+    token: string;
+    newPassword: string;
+}

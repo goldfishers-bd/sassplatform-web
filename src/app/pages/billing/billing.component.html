@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="card mb-4" *ngIf="currentSubscription() as sub">
+    <h2 class="text-xl font-semibold mb-2">Current Subscription</h2>
+    <div class="flex items-center gap-3">
+        <p-tag [value]="sub.status"
+            [severity]="sub.status === 'Active' ? 'success' : sub.status === 'Trial' ? 'info' : 'danger'">
+        </p-tag>
+        <span class="text-sm text-gray-500">Since {{ sub.startDate | date:'mediumDate' }}</span>
+    </div>
+</div>
+
+<div class="card">
+    <h2 class="text-xl font-semibold mb-4">Available Plans</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div *ngFor="let plan of activePlans()" class="border rounded-xl p-4 flex flex-col gap-2"
+            [ngClass]="isCurrentPlan(plan) ? 'border-primary border-2' : 'border-gray-200'">
+
+            <div class="flex justify-between items-start">
+                <h3 class="text-lg font-semibold">{{ plan.name }}</h3>
+                <p-tag *ngIf="isCurrentPlan(plan)" value="Current" severity="success"></p-tag>
+            </div>
+
+            <p class="text-2xl font-bold">{{ plan.price | currency }} <span class="text-sm font-normal text-gray-500">/
+                    {{ plan.billingCycle }}</span></p>
+            <p class="text-sm text-gray-500">{{ plan.description }}</p>
+            <p class="text-sm">Up to {{ plan.maxUsers }} users</p>
+
+            <p-button *ngIf="!isCurrentPlan(plan)" label="Switch to this plan" styleClass="w-full mt-2"
+                [loading]="switching() === plan.id" (onClick)="confirmSwitch(plan)">
+            </p-button>
+        </div>
+    </div>
+</div>

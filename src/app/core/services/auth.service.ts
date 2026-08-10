@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AcceptInviteRequest, AuthResponse, LoginRequest, SignupRequest } from '../models/auth.models';
+import { AcceptInviteRequest, AuthResponse, ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, SignupRequest } from '../models/auth.models';
 import { ApiEndpoints } from '../constants/api-endpoints';
 
 interface DecodedToken {
@@ -91,5 +91,13 @@ export class AuthService {
     acceptInvite(dto: AcceptInviteRequest): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${environment.apiUrl}/${ApiEndpoints.invitations.accept}`, dto)
             .pipe(tap(res => this.setSession(res)));
+    }
+
+    forgotPassword(dto: ForgotPasswordRequest): Observable<{ message: string }> {
+        return this.http.post<{ message: string }>(`${environment.apiUrl}/${ApiEndpoints.auth.forgotPassword}`, dto);
+    }
+
+    resetPassword(dto: ResetPasswordRequest): Observable<{ message: string }> {
+        return this.http.post<{ message: string }>(`${environment.apiUrl}/${ApiEndpoints.auth.resetPassword}`, dto);
     }
 }

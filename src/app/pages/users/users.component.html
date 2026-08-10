@@ -1,0 +1,38 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="card">
+    <h2 class="text-xl font-semibold mb-4">Team Members</h2>
+
+    <p-table [value]="users()" [loading]="loading()" [paginator]="true" [rows]="10" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th style="width: 140px"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <p-tag [value]="user.isActive ? 'Active' : 'Inactive'"
+                        [severity]="user.isActive ? 'success' : 'danger'"></p-tag>
+                </td>
+                <td>
+                    <p-button *ngIf="!isSelf(user)" [label]="user.isActive ? 'Deactivate' : 'Reactivate'"
+                        [severity]="user.isActive ? 'danger' : 'success'" [text]="true" (onClick)="confirmToggle(user)">
+                    </p-button>
+                    <span *ngIf="isSelf(user)" class="text-sm text-gray-400">(you)</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4" class="text-center">No users found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

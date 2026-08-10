@@ -4,8 +4,6 @@ import { Dashboard } from './app/pages/dashboard/dashboard';
 import { Documentation } from './app/pages/documentation/documentation';
 import { Landing } from './app/pages/landing/landing';
 import { Notfound } from './app/pages/notfound/notfound';
-import { Roles } from './app/core/constants/roles';
-import { roleGuard } from './app/core/guards/role.guard';
 import { authGuard } from './app/core/guards/auth.guard';
 
 export const appRoutes: Routes = [
@@ -27,7 +25,9 @@ export const appRoutes: Routes = [
         children: [
             { path: 'login', loadComponent: () => import('./app/pages/auth/login/login.component').then(m => m.LoginComponent) },
             { path: 'signup', loadComponent: () => import('./app/pages/auth/signup/signup.component').then(m => m.SignupComponent) },
-            { path: 'accept-invite', loadComponent: () => import('./app/pages/auth/accept-invite/accept-invite.component').then(m => m.AcceptInviteComponent) }
+            { path: 'accept-invite', loadComponent: () => import('./app/pages/auth/accept-invite/accept-invite.component').then(m => m.AcceptInviteComponent) },
+            { path: 'forgot-password', loadComponent: () => import('./app/pages/auth/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent) },
+            { path: 'reset-password', loadComponent: () => import('./app/pages/auth/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) }
         ]
     },
     //{ path: 'plans/manage', canActivate: [authGuard, roleGuard(Roles.SuperAdmin)], component: PlanManageComponent },
