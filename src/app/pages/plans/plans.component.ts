@@ -13,6 +13,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PlanService } from '../../core/services/plan.service';
 import { Plan } from '../../core/models/plan.models';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-plans',
@@ -87,7 +88,7 @@ export class PlansComponent implements OnInit {
 
         const onError = (err: any) => {
             this.saving.set(false);
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? 'Save failed' });
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, 'Save failed') });
         };
 
         if (this.isEditMode()) {
@@ -123,7 +124,7 @@ export class PlansComponent implements OnInit {
     private delete(id: string): void {
         this.planService.delete(id).subscribe({
             next: () => { this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Plan deleted' }); this.load(); },
-            error: (err) => this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? 'Delete failed' })
+            error: (err) => this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, 'Delete failed') })
         });
     }
 }

@@ -11,6 +11,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TenantService } from '../../core/services/tenant.service';
 import { Tenant } from '../../core/models/tenant.models';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-tenants',
@@ -75,7 +76,7 @@ export class TenantsComponent implements OnInit {
 
         const onError = (err: any) => {
             this.saving.set(false);
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? 'Save failed' });
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, 'Save failed') });
         };
 
         if (this.isEditMode()) {
@@ -102,7 +103,7 @@ export class TenantsComponent implements OnInit {
                 this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Tenant deleted' });
                 this.load();
             },
-            error: (err) => this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? 'Delete failed' })
+            error: (err) => this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, 'Delete failed') })
         });
     }
 }

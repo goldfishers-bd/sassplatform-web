@@ -9,6 +9,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { UserService } from '../../core/services/user.service';
 import { TenantUser } from '../../core/models/user.models';
 import { AuthService } from '@/app/core/services/auth.service';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-users',
@@ -62,7 +63,7 @@ export class UsersComponent implements OnInit {
                 this.load();
             },
             error: (err) => {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? err.error?.errors?.UserId?.[0] ?? `Failed to ${action}` });
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, `Failed to ${action}`) });
             }
         });
     }

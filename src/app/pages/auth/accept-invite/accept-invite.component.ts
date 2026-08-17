@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { AuthService } from '../../../core/services/auth.service';
 import { RoutePaths } from '../../../core/constants/route-paths';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-accept-invite',
@@ -55,7 +56,7 @@ export class AcceptInviteComponent implements OnInit {
             },
             error: (err) => {
                 this.loading.set(false);
-                this.errorMessage.set(err.error?.title ?? 'Invitation is invalid or expired.');
+                this.errorMessage.set(extractErrorMessage(err, 'Invitation is invalid or expired.'));
             }
         });
     }

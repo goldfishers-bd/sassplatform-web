@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { AuthService } from '../../../core/services/auth.service';
 import { RoutePaths } from '../../../core/constants/route-paths';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-signup',
@@ -44,7 +45,7 @@ export class SignupComponent {
             },
             error: (err) => {
                 this.loading.set(false);
-                this.errorMessage.set(err.error?.errors ? 'Please fix the highlighted errors.' : (err.error?.title ?? 'Signup failed.'));
+                this.errorMessage.set(extractErrorMessage(err, 'Signup failed.'));
             }
         });
     }

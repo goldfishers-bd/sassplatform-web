@@ -78,6 +78,11 @@ export class AppMenu {
                         routerLink: ['/pages/users']
                     },
                     {
+                        label: 'Profile',
+                        icon: 'pi pi-fw pi-globe',
+                        routerLink: ['/pages/profile']
+                    },
+                    {
                         label: 'Landing',
                         icon: 'pi pi-fw pi-globe',
                         routerLink: ['/landing']

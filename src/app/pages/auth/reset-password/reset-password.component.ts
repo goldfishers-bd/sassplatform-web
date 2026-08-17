@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { AuthService } from '../../../core/services/auth.service';
 import { RoutePaths } from '../../../core/constants/route-paths';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-reset-password',
@@ -56,7 +57,7 @@ export class ResetPasswordComponent implements OnInit {
             },
             error: (err) => {
                 this.loading.set(false);
-                this.errorMessage.set(err.error?.title ?? 'Reset link is invalid or expired.');
+                this.errorMessage.set(extractErrorMessage(err, 'Reset link is invalid or expired.'));
             }
         });
     }

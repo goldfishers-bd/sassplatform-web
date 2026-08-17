@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { AuthService } from '../../../core/services/auth.service';
 import { RoutePaths } from '../../../core/constants/route-paths';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-login',
@@ -43,7 +44,7 @@ export class LoginComponent {
             },
             error: (err) => {
                 this.loading.set(false);
-                this.errorMessage.set(err.error?.title ?? 'Login failed. Check your credentials.');
+                this.errorMessage.set(extractErrorMessage(err, 'Login failed. Check your credentials.'));
             }
         });
     }

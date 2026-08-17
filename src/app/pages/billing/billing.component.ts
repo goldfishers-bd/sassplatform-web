@@ -9,6 +9,7 @@ import { SubscriptionService } from '../../core/services/subscription.service';
 import { PlanService } from '../../core/services/plan.service';
 import { Subscription } from '../../core/models/subscription.models';
 import { Plan } from '../../core/models/plan.models';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-billing',
@@ -72,7 +73,7 @@ export class BillingComponent implements OnInit {
             },
             error: (err) => {
                 this.switching.set(null);
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? err.error?.errors?.PlanId?.[0] ?? 'Failed to switch plan' });
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, 'Failed to switch plan') });
             }
         });
     }

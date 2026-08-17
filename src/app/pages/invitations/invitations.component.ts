@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { InvitationService } from '../../core/services/invitation.service';
 import { Invitation } from '../../core/models/invitation.models';
 import { Roles } from '../../core/constants/roles';
+import { extractErrorMessage } from '@/app/core/utils/error-utils';
 
 @Component({
     selector: 'app-invitations',
@@ -71,7 +72,7 @@ export class InvitationsComponent implements OnInit {
             },
             error: (err) => {
                 this.sending.set(false);
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.title ?? 'Failed to send invitation' });
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: extractErrorMessage(err, 'Failed to send invitation') });
             }
         });
     }

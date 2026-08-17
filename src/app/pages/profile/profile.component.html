@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+    <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Profile</h2>
+
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="flex flex-col gap-4">
+            <div>
+                <label class="block mb-2">Email</label>
+                <input pInputText [value]="profile()?.email" disabled class="w-full" />
+            </div>
+
+            <div>
+                <label class="block mb-2">Role</label>
+                <input pInputText [value]="profile()?.role" disabled class="w-full" />
+            </div>
+
+            <div>
+                <label class="block mb-2">Display Name</label>
+                <input pInputText formControlName="displayName" class="w-full" />
+            </div>
+
+            <p-button type="submit" label="Save Changes" [loading]="savingProfile()"
+                [disabled]="profileForm.invalid"></p-button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2 class="text-xl font-semibold mb-4">Change Password</h2>
+
+        <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" class="flex flex-col gap-4">
+            <div>
+                <label class="block mb-2">Current Password</label>
+                <p-password formControlName="currentPassword" [feedback]="false" [toggleMask]="true" styleClass="w-full"
+                    inputStyleClass="w-full"></p-password>
+            </div>
+
+            <div>
+                <label class="block mb-2">New Password</label>
+                <p-password formControlName="newPassword" [toggleMask]="true" styleClass="w-full"
+                    inputStyleClass="w-full"></p-password>
+            </div>
+
+            <div>
+                <label class="block mb-2">Confirm New Password</label>
+                <p-password formControlName="confirmPassword" [feedback]="false" [toggleMask]="true" styleClass="w-full"
+                    inputStyleClass="w-full"></p-password>
+            </div>
+
+            <p-message *ngIf="passwordError()" severity="error" [text]="passwordError()!"
+                styleClass="w-full"></p-message>
+
+            <p-button type="submit" label="Change Password" severity="warn" [loading]="changingPassword()"
+                [disabled]="passwordForm.invalid"></p-button>
+        </form>
+    </div>
+
+</div>

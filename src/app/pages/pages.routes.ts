@@ -12,6 +12,7 @@ export default [
     { path: 'invitations', canActivate: [authGuard, roleGuard(Roles.TenantAdmin)], loadComponent: () => import('./invitations/invitations.component').then(m => m.InvitationsComponent) },
     { path: 'billing', canActivate: [authGuard, roleGuard(Roles.TenantAdmin)], loadComponent: () => import('./billing/billing.component').then(m => m.BillingComponent) },
     { path: 'users', canActivate: [authGuard, roleGuard(Roles.TenantAdmin)], loadComponent: () => import('./users/users.component').then(m => m.UsersComponent) },
+    { path: 'profile', canActivate: [authGuard], loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
     { path: 'documentation', component: Documentation },
     { path: 'crud', component: Crud },
     { path: 'empty', component: Empty },

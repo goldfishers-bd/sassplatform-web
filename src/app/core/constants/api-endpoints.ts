@@ -16,5 +16,9 @@ export const ApiEndpoints = {
         current: 'subscriptions/current',
         changePlan: 'subscriptions/change-plan'
     },
+    profile: {
+        base: 'profile',
+        changePassword: 'profile/change-password'
+    },
     users: 'users',
 } as const;
